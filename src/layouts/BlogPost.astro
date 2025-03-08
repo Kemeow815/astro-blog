@@ -3,6 +3,7 @@ import { type CollectionEntry, render } from "astro:content";
 
 import Masthead from "@/components/blog/Masthead.astro";
 import TOC from "@/components/blog/TOC.astro";
+import Comment from "@components/Comment.astro";
 import WebMentions from "@/components/blog/webmentions/index.astro";
 
 import BaseLayout from "./Base.astro";
@@ -77,3 +78,8 @@ const { headings } = await render(post);
 	const observer = new IntersectionObserver(callback);
 	observer.observe(targetHeader);
 </script>
+
+<Comment />
+<Layout>
+  <!-- other code -->
+</Layout>
