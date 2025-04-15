@@ -1,20 +1,65 @@
-
 <section class="giscus mx-auto mt-10 w-full"></section>
 
-<script
-  src="https://giscus.app/client.js"
-  data-repo="Kemeow815/astro-blog"
-  data-repo-id="R_kgDOOFQURg"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOOFQURs4Cntro"
-  data-mapping="title"
-  data-strict="0"
-  data-reactions-enabled="1"
-  data-emit-metadata="1"
-  data-input-position="top"
-  data-theme="preferred_color_scheme"
-  data-lang="zh-CN"
-  data-loading="lazy"
-  crossorigin="anonymous"
-  async
-></script>
+<script>
+  // 检测主题变化并更新 Giscus
+  function updateGiscusTheme() {
+    const theme = localStorage.getItem('theme') || 
+                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    const message = {
+      setConfig: {
+        theme: theme === 'dark' ? 'dark' : 'light'
+      }
+    };
+    
+    const iframe = document.querySelector('iframe.giscus-frame');
+    if (iframe) {
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    }
+  }
+
+  // 初始加载
+  document.addEventListener('DOMContentLoaded', function() {
+    // 监听主题变化
+    const observer = new MutationObserver(updateGiscusTheme);
+    observer.observe(document.documentElement, { 
+      attributes: true, 
+      attributeFilter: ['class', 'data-theme'] 
+    });
+
+    // 初始主题设置
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.setAttribute('data-repo', 'Kemeow815/astro-blog');
+    script.setAttribute('data-repo-id', 'R_kgDOOFQURg');
+    script.setAttribute('data-category', 'Announcements');
+    script.setAttribute('data-category-id', 'DIC_kwDOOFQURs4Cntro');
+    script.setAttribute('data-mapping', 'title');
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '1');
+    script.setAttribute('data-input-position', 'top');
+    script.setAttribute('data-theme', 'preferred_color_scheme');
+    script.setAttribute('data-lang', 'zh-CN');
+    script.setAttribute('data-loading', 'lazy');
+    
+    document.body.appendChild(script);
+    
+    // 监听 Giscus 发送的消息
+    window.addEventListener('message', function(event) {
+      if (event.origin !== 'https://giscus.app') return;
+      if (!(typeof event.data === 'object' && event.data.giscus)) return;
+      
+      if (event.data.giscus.error) {
+        console.error('Giscus error:', event.data.giscus.error);
+      } else if (event.data.giscus.resizeHeight) {
+        // 可以在这里处理高度调整
+      }
+    });
+    
+    // 初始主题设置
+    updateGiscusTheme();
+  });
+</script>
