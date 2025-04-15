@@ -4,6 +4,7 @@ import { getAllPosts } from "@/data/post";
 import PostLayout from "@/layouts/BlogPost.astro";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 export const prerender = true;
+import Giscus from "@/components/Giscus.astro";
 
 // if you're using an adaptor in SSR mode, getStaticPaths wont work -> https://docs.astro.build/en/guides/routing/#modifying-the-slug-example-for-ssr
 export const getStaticPaths = (async () => {
@@ -22,4 +23,5 @@ const { Content } = await render(post);
 
 <PostLayout post={post}>
 	<Content />
+	<Giscus />
 </PostLayout>
