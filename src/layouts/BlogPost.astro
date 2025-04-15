@@ -4,9 +4,9 @@ import { type CollectionEntry, render } from "astro:content";
 import Masthead from "@/components/blog/Masthead.astro";
 import TOC from "@/components/blog/TOC.astro";
 import WebMentions from "@/components/blog/webmentions/index.astro";
-import Comment from "@/components/Giscus.astro";
 
 import BaseLayout from "./Base.astro";
+import Giscus from "@/components/Giscus.astro";
 
 interface Props {
 	post: CollectionEntry<"post">;
@@ -60,10 +60,7 @@ const { headings } = await render(post);
 	</button>
 </BaseLayout>
 
-<Comment />
-<Layout>
-  <!-- other code -->
-</Layout>
+<Giscus />
 
 <script>
 	const scrollBtn = document.getElementById("to-top-btn") as HTMLButtonElement;
