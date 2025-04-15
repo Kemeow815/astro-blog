@@ -101,7 +101,7 @@ export default defineConfig({
             footnoteLabelProperties: {
                 className: [""],
             },
-      footnoteLabel: '脚注：',
+      footnoteLabel: '脚注：欢迎来到我的博客！',
         },
     },
     // https://docs.astro.build/en/guides/prefetch/
@@ -110,7 +110,7 @@ export default defineConfig({
     prefetchAll: true,
   },
     // ! 改为你的网站地址，不然社交图片无法加载
-    site: "https://myblog.kemiaosw.top/",
+    site: "https://mublog.kemeow.cn/",
     vite: {
         optimizeDeps: {
             exclude: ["@resvg/resvg-js"],
