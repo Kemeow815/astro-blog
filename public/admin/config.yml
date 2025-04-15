@@ -2,7 +2,7 @@ backend:
   name: github
   branch: main # change this to your branch
   repo: Kemeow815/astro-blog # 1、change this to your repo
-  site_domain: mublog.kemeow.cn # 2、change this to your domain
+  site_domain: myblog.kemeow.cn # 2、change this to your domain
   base_url: https://mublog.kemeow.cn # 3、change this to your prod URL
   auth_endpoint: oauth # the oauth route provided by the integration
 
